@@ -4,7 +4,7 @@ const ai = {
   async generateImage(prompt: string) {
 
     const response = await axios.post(
-      "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
+      "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1",
       {
         inputs: prompt
       },
