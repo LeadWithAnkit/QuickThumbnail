@@ -4,21 +4,15 @@ const ai = {
   async generateImage(prompt: string) {
 
     const response = await axios.post(
-      "https://router.huggingface.co/hf-inference/models/SG161222/RealVisXL_V4.0",
+      "https://router.huggingface.co/hf-inference/models/SG161222/RealVisXL_V4.0/pipeline/text-to-image",
       {
-        inputs: prompt,
-        parameters: {
-          guidance_scale: 7,
-          num_inference_steps: 30,
-          negative_prompt:
-            "cartoon, anime, illustration, painting, drawing, sketch, low quality, blurry"
-        }
+        inputs: prompt
       },
       {
         headers: {
           Authorization: `Bearer ${process.env.HF_API_KEY}`,
-          "Content-Type": "application/json",
-          Accept: "image/png"
+          Accept: "image/png",
+          "Content-Type": "application/json"
         },
         responseType: "arraybuffer"
       }
