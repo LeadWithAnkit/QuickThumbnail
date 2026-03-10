@@ -66,18 +66,7 @@ export const generateThumbnail = async (req: Request, res: Response) => {
 
     // -------- AI PROMPT --------
 
-    let prompt = `
-    photorealistic image of ${title},
-    real world environment related to the topic,
-    natural lighting, cinematic lighting,
-    ultra realistic photography,
-    DSLR camera, 85mm lens,
-    shallow depth of field,
-    HDR, sharp focus,
-    4k professional photography,
-    realistic colors and textures,
-    not cartoon, not illustration, not painting, not anime
-    `;
+    let prompt = `photorealistic image of ${title}, real world environment related to the topic, natural lighting, cinematic lighting, ultra realistic photography, DSLR camera, 85mm lens, shallow depth of field, HDR, sharp focus, 4k professional photography, realistic colors and textures, not cartoon, not illustration, not painting, not anime`;
 
     // Style influence
     if (style && stylePrompts[style as keyof typeof stylePrompts]) {
