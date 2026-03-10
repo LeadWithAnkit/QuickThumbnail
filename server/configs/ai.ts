@@ -4,12 +4,14 @@ const ai = {
   async generateImage(prompt: string) {
 
     const response = await axios.post(
-      "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-xl-refiner-1.0",
+      "https://router.huggingface.co/hf-inference/models/SG161222/RealVisXL_V4.0",
       {
         inputs: prompt,
         parameters: {
-          guidance_scale: 7.5,
-          num_inference_steps: 35
+          guidance_scale: 7,
+          num_inference_steps: 30,
+          negative_prompt:
+            "cartoon, anime, illustration, painting, drawing, sketch, low quality, blurry"
         }
       },
       {
