@@ -28,11 +28,17 @@ const Generate = () => {
   const [style, setStyle] = useState<ThumbnailStyle>("Bold & Graphic"); 
   const [styleDropdownOpen, setStyleDropdownOpen] = useState(false);
 
-  const handleGenerate = async () => {
-    if (!isLoggedIn) return toast.error("You must be logged in to generate a thumbnail.");
-      if(!title.trim()) {
-        return toast.error("Please enter a title for the thumbnail.");
+const handleGenerate = async () => {
+  try {
+
+    if (!isLoggedIn) {
+      return toast.error("You must be logged in to generate a thumbnail.");
     }
+
+    if (!title.trim()) {
+      return toast.error("Please enter a title for the thumbnail.");
+    }
+
     setLoading(true);
 
     const api_payload = {
@@ -42,16 +48,29 @@ const Generate = () => {
       aspect_ratio: aspectRatio,
       color_scheme: colorSchemeId,
       text_overlay: true,
-    }
- 
+    };
+
     const { data } = await api.post('/api/thumbnail/generate', api_payload);
-    
+
     if (data.thumbnail) {
       navigate('/generate/' + data.thumbnail._id);
       toast.success(data.message || "Thumbnail generated successfully!");
     }
 
-  }
+  } catch (error: any) {
+
+    console.error("Generate error:", error);
+
+    toast.error(
+      error?.response?.data?.error ||
+      error?.response?.data?.message ||
+      "Thumbnail generation failed"
+    );
+
+  } finally {
+    setLoading(false);
+    }
+   };
 
   const fetchThumbnail = async () => {
     try {

@@ -23,7 +23,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:3000' , 'https://.app'], 
+    origin: ['http://localhost:5173', 'http://localhost:3000'], 
     credentials: true,
 }));
 
@@ -34,7 +34,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7, 
+        maxAge: 24 * 60 * 60 * 1000, 
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production', 
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',

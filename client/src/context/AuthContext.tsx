@@ -62,9 +62,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setUser(null);
             setIsLoggedIn(false);
             toast.success(data.message || 'Logout successful');
-        } catch (error) {
-            toast.error('Logout failed');
-        }
+        } catch (error: any) {
+            console.error(error.response?.data);
+            toast.error(error.response?.data?.message || 'Login failed');
+           }
     }
 
     const fetchUser = async () => {
