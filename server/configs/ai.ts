@@ -1,26 +1,13 @@
-import axios from "axios";
-
 const ai = {
   async generateImage(prompt: string) {
 
-    const response = await axios.post(
-      "https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5",
-      {
-        inputs: prompt
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.HF_API_KEY}`,
-          "Content-Type": "application/json",
-          Accept: "image/png"
-        },
-        responseType: "arraybuffer"
-      }
-    );
+    const encodedPrompt = encodeURIComponent(prompt);
 
-    const base64 = Buffer.from(response.data).toString("base64");
+    const imageUrl =
+      `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1024&height=576&model=flux`;
 
-    return `data:image/png;base64,${base64}`;
+    return imageUrl;
+
   }
 };
 
